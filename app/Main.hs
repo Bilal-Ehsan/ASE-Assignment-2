@@ -1,6 +1,7 @@
 module Main where
 
-import Lib
+import BST
 
 main :: IO ()
-main = someFunc
+main = do
+  putStrLn "Nothing here yet"
