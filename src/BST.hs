@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module BST (BST(..), lookup, insert) where
+module BST (BST(..), lookup, insert, displayTree, emptyBST) where
 
 import Prelude hiding (lookup)
 
@@ -21,3 +21,11 @@ insert (InternalNode key item leftChild rightChild) (newKey, newItem)
   | newKey == key = InternalNode newKey newItem leftChild rightChild  -- Updates in place 
   | newKey > key = InternalNode key item leftChild (insert rightChild (newKey, newItem))
   | newKey < key = InternalNode key item (insert rightChild (newKey, newItem)) rightChild
+
+emptyBST :: BST
+emptyBST = Leaf
+
+displayTree :: BST -> [String]
+displayTree Leaf = []
+displayTree (InternalNode key item leftChild rightChild) =
+  displayTree leftChild ++ [item] ++ displayTree rightChild

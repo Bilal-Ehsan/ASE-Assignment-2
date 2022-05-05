@@ -50,6 +50,7 @@ test-suite BST-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      DisplayTests
       InsertTests
       LookupTests
       MockTree
