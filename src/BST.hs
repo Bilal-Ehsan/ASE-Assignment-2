@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
-module BST (BST(..), lookup, insert, displayTree, emptyBST) where
+module BST (BST(..), lookup, insert, displayTree, emptyBST, remove) where
 
 import Prelude hiding (lookup)
 
@@ -29,3 +29,22 @@ displayTree :: BST -> [String]
 displayTree Leaf = []
 displayTree (InternalNode key item leftChild rightChild) =
   displayTree leftChild ++ [item] ++ displayTree rightChild
+
+remove :: BST -> Int -> BST
+remove Leaf _ = Leaf
+remove (InternalNode key item leftChild rightChild) soughtKey
+  | key == soughtKey = removeRec(InternalNode key item leftChild rightChild)
+  | key > soughtKey = InternalNode key item (remove leftChild soughtKey) rightChild
+  | key < soughtKey = InternalNode key item leftChild (remove rightChild soughtKey)
+
+removeRec :: BST -> BST
+removeRec (InternalNode key item Leaf Leaf) = Leaf
+removeRec (InternalNode key item Leaf rightChild) = rightChild
+removeRec (InternalNode key item leftChild Leaf) = leftChild
+removeRec (InternalNode key item leftChild rightChild) =
+  InternalNode newKey newItem leftChild Leaf
+    where (newKey, newItem) = minimumNode rightChild
+
+minimumNode :: BST -> (Int, String)
+minimumNode (InternalNode key item Leaf _) = (key, item)
+minimumNode (InternalNode _ _ leftChild _) = minimumNode leftChild

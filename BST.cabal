@@ -54,6 +54,7 @@ test-suite BST-test
       InsertTests
       LookupTests
       MockTree
+      RemoveTests
       Paths_BST
   hs-source-dirs:
       test
