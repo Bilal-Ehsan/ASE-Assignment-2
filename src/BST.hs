@@ -19,8 +19,8 @@ insert :: BST -> (Int, String) -> BST
 insert Leaf (key, item) = InternalNode key item Leaf Leaf
 insert (InternalNode key item leftChild rightChild) (newKey, newItem)
   | newKey == key = InternalNode newKey newItem leftChild rightChild  -- Updates in place 
-  | newKey > key = InternalNode key item leftChild (insert rightChild (newKey, newItem))
-  | newKey < key = InternalNode key item (insert rightChild (newKey, newItem)) rightChild
+  | newKey > key  = InternalNode key item leftChild (insert rightChild (newKey, newItem))
+  | newKey < key  = InternalNode key item (insert rightChild (newKey, newItem)) rightChild
 
 emptyBST :: BST
 emptyBST = Leaf
@@ -34,8 +34,8 @@ remove :: BST -> Int -> BST
 remove Leaf _ = Leaf
 remove (InternalNode key item leftChild rightChild) soughtKey
   | key == soughtKey = removeRec(InternalNode key item leftChild rightChild)
-  | key > soughtKey = InternalNode key item (remove leftChild soughtKey) rightChild
-  | key < soughtKey = InternalNode key item leftChild (remove rightChild soughtKey)
+  | key > soughtKey  = InternalNode key item (remove leftChild soughtKey) rightChild
+  | key < soughtKey  = InternalNode key item leftChild (remove rightChild soughtKey)
 
 removeRec :: BST -> BST
 removeRec (InternalNode key item Leaf Leaf) = Leaf
