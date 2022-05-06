@@ -22,5 +22,5 @@ displayTests :: [Test]
 displayTests = 
   [
     TestLabel "Display an empty tree" test_display_displayEmpty,
-    TestLabel "Display a normal tree" test_display_displayInOrder
+    TestLabel "Display a non-empty tree" test_display_displayInOrder
   ]
